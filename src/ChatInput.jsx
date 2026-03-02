@@ -2,9 +2,8 @@ import { useState } from "react";
 import { getOpenAIResponse } from "./openai";
 import "./ChatInput.css";
 
-function ChatInput({ messages, setMessage }) {
+function ChatInput({ messages, setMessage, isLoading, setIsLoading }) {
   const [inputText, setInputText] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
   function handleMessage(event) {
     setInputText(event.target.value);

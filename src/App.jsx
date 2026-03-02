@@ -1,20 +1,23 @@
 import Chatbot from "./ChatBot";
-import ChatInput from "./ChatInput"
+import ChatInput from "./ChatInput";
 import { useState } from "react";
-import './App.css'
+import "./App.css";
+
 function App() {
-   
-     const chatMessages = []
-      
-    
-  const [messages, setMessage] = useState(chatMessages);
+  const [messages, setMessage] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <div className="app-container">
-      <Chatbot  messages={messages}/>
-      <ChatInput messages={messages} setMessage={setMessage}/>
+      <Chatbot messages={messages} isLoading={isLoading} />
+      <ChatInput
+        messages={messages}
+        setMessage={setMessage}
+        isLoading={isLoading}
+        setIsLoading={setIsLoading}
+      />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
