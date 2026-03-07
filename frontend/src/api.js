@@ -38,11 +38,22 @@ export async function getMe() {
   return request("/auth/me");
 }
 
-// Chat – proxied through backend so API key stays server-side
-export async function sendChatMessage(message, history = []) {
+// Chat history
+export async function getChats() {
+  const data = await request("/chat");
+  return data.conversations || [];
+}
+
+export async function getChat(chatId) {
+  const data = await request(`/chat/${chatId}`);
+  return data.conversation;
+}
+
+// Chat – send message (creates or continues a conversation)
+export async function sendChatMessage(message, chatId) {
   const data = await request("/chat", {
     method: "POST",
-    body: JSON.stringify({ message, history }),
+    body: JSON.stringify({ message, chatId }),
   });
-  return data.reply;
+  return data; // { reply, chatId }
 }

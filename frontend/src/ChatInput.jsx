@@ -2,7 +2,15 @@ import { useState } from "react";
 import { sendChatMessage } from "./api";
 import "./ChatInput.css";
 
-function ChatInput({ messages, setMessage, isLoading, setIsLoading }) {
+function ChatInput({
+  messages,
+  setMessage,
+  isLoading,
+  setIsLoading,
+  activeChatId,
+  setActiveChatId,
+  onMessageSent,
+}) {
   const [inputText, setInputText] = useState("");
 
   function handleMessage(event) {
@@ -24,18 +32,18 @@ function ChatInput({ messages, setMessage, isLoading, setIsLoading }) {
     setInputText("");
     setIsLoading(true);
 
-    // Build conversation history for context
-    const history = updatedMessages.map((m) => ({
-      role: m.sender === "user" ? "user" : "assistant",
-      content: m.message,
-    }));
-
     try {
-      const reply = await sendChatMessage(trimmed, history.slice(0, -1));
+      const { reply, chatId } = await sendChatMessage(trimmed, activeChatId);
+      if (chatId && chatId !== activeChatId) {
+        setActiveChatId(chatId);
+      }
       setMessage((prev) => [
         ...prev,
         { message: reply, sender: "robot", id: crypto.randomUUID() },
       ]);
+      if (onMessageSent) {
+        onMessageSent();
+      }
     } catch (err) {
       setMessage((prev) => [
         ...prev,
