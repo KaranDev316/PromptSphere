@@ -1,6 +1,7 @@
 import { Router } from "express";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
+import maskSensitive from "../utils/sanitize.js";
 
 const router = Router();
 
@@ -19,7 +20,7 @@ router.post("/register", async (req, res) => {
       contentType: req.headers["content-type"],
       authorization: req.headers.authorization ? "present" : "none",
     });
-    console.log("[auth/register] body:", req.body);
+    console.log("[auth/register] body:", maskSensitive(req.body));
     // Ensure we received JSON body
     if (!req.is("application/json") && Object.keys(req.body || {}).length === 0) {
       return res.status(400).json({ message: "Expected application/json body" });
@@ -63,7 +64,7 @@ router.post("/login", async (req, res) => {
       contentType: req.headers["content-type"],
       authorization: req.headers.authorization ? "present" : "none",
     });
-    console.log("[auth/login] body:", req.body);
+    console.log("[auth/login] body:", maskSensitive(req.body));
     if (!req.is("application/json") && Object.keys(req.body || {}).length === 0) {
       return res.status(400).json({ message: "Expected application/json body" });
     }
