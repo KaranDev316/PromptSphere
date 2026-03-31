@@ -15,17 +15,44 @@ function AuthForm({ onAuth }) {
     setError("");
     setLoading(true);
 
+    // Trim and validate inputs before sending
+    const u = username.trim();
+    const em = email.trim();
+    const pw = password;
+
+    console.log("AuthForm submit:", { isLogin, username: u, email: em, passwordPresent: !!pw });
+
+    if (!isLogin) {
+      if (!u || !em || !pw) {
+        setError("Please fill username, email and password.");
+        setLoading(false);
+        return;
+      }
+    } else {
+      if (!em || !pw) {
+        setError("Please fill email and password.");
+        setLoading(false);
+        return;
+      }
+    }
+
     try {
       let data;
       if (isLogin) {
-        data = await login(email, password);
+        data = await login(em, pw);
       } else {
-        data = await register(username, email, password);
+        data = await register(u, em, pw);
       }
-      localStorage.setItem("token", data.token);
+
+      console.log("Auth response:", data);
+
+      if (data && data.token) {
+        localStorage.setItem("token", data.token);
+      }
       onAuth(data.user);
     } catch (err) {
-      setError(err.message);
+      console.error("Auth error:", err);
+      setError(err.message || "Authentication error");
     } finally {
       setLoading(false);
     }

@@ -1,7 +1,6 @@
-// ============================================================
-// Frontend API helper – talks to the Express backend
-// ============================================================
-const API_BASE = "/api";
+
+// Use explicit backend URL in dev (your backend runs on localhost:5001)
+const API_BASE = import.meta?.env?.DEV ? "http://localhost:5001/api" : "/api";
 
 function getToken() {
   return localStorage.getItem("token");
@@ -12,31 +11,92 @@ async function request(path, options = {}) {
   const headers = { "Content-Type": "application/json", ...options.headers };
   if (token) headers.Authorization = `Bearer ${token}`;
 
-  const res = await fetch(`${API_BASE}${path}`, { ...options, headers });
-  const data = await res.json();
+  // Log outgoing request for debugging
+  try {
+    if (options && options.body) {
+      console.log("API request:", `${API_BASE}${path}`, JSON.parse(options.body));
+    } else {
+      console.log("API request:", `${API_BASE}${path}`);
+    }
+  } catch (e) {
+    console.log("API request (non-JSON body):", `${API_BASE}${path}`, options.body);
+  }
 
-  if (!res.ok) throw new Error(data.message || "Request failed");
+  const res = await fetch(`${API_BASE}${path}`, { ...options, headers });
+  // Safely parse JSON only when present, and gracefully handle empty/non-JSON responses
+  const contentType = res.headers.get("content-type") || "";
+  let data = null;
+
+  if (res.status === 204) {
+    data = null;
+  } else if (contentType.includes("application/json")) {
+    try {
+      data = await res.json();
+    } catch (err) {
+      // Invalid JSON — read text for debugging/error message
+      const text = await res.text();
+      data = { message: text || "Invalid JSON response from server" };
+    }
+  } else {
+    const text = await res.text();
+    data = text ? { message: text } : null;
+  }
+
+  if (!res.ok) {
+    const message = data && data.message ? data.message : `Request failed with status ${res.status}`;
+    throw new Error(message);
+  }
+
   return data;
 }
 
 // Auth
+const BASE_URL = "http://localhost:5001/api/auth";
+
 export async function register(username, email, password) {
-  return request("/auth/register", {
+  const res = await fetch(`${BASE_URL}/register`, {
     method: "POST",
-    body: JSON.stringify({ username, email, password }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      username,
+      email,
+      password,
+    }),
   });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.message || "Register failed");
+  }
+
+  return data;
 }
 
 export async function login(email, password) {
-  return request("/auth/login", {
+  const res = await fetch(`${BASE_URL}/login`, {
     method: "POST",
-    body: JSON.stringify({ email, password }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      password,
+    }),
   });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.message || "Login failed");
+  }
+
+  return data;
 }
 
-export async function getMe() {
-  return request("/auth/me");
-}
+
 
 // Chat history
 export async function getChats() {
@@ -56,4 +116,21 @@ export async function sendChatMessage(message, chatId) {
     body: JSON.stringify({ message, chatId }),
   });
   return data; // { reply, chatId }
+}
+ 
+export async function getMe() {
+  const token = localStorage.getItem("token");
+
+  console.log("TOKEN:", token);
+
+  const res = await fetch("http://localhost:5001/api/auth/me", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  console.log("RESPONSE:", res);
+
+  const data = await res.json();
+  return data;
 }

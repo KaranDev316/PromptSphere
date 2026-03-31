@@ -11,6 +11,20 @@ function signToken(userId) {
 // POST /api/auth/register
 router.post("/register", async (req, res) => {
   try {
+    // Debug: log incoming headers and body to trace 403/400 issues
+    console.log("[auth/register] headers:", {
+      origin: req.headers.origin,
+      host: req.headers.host,
+      referer: req.headers.referer,
+      contentType: req.headers["content-type"],
+      authorization: req.headers.authorization ? "present" : "none",
+    });
+    console.log("[auth/register] body:", req.body);
+    // Ensure we received JSON body
+    if (!req.is("application/json") && Object.keys(req.body || {}).length === 0) {
+      return res.status(400).json({ message: "Expected application/json body" });
+    }
+
     const { username, email, password } = req.body;
 
     if (!username || !email || !password) {
@@ -42,6 +56,18 @@ router.post("/register", async (req, res) => {
 // POST /api/auth/login
 router.post("/login", async (req, res) => {
   try {
+    console.log("[auth/login] headers:", {
+      origin: req.headers.origin,
+      host: req.headers.host,
+      referer: req.headers.referer,
+      contentType: req.headers["content-type"],
+      authorization: req.headers.authorization ? "present" : "none",
+    });
+    console.log("[auth/login] body:", req.body);
+    if (!req.is("application/json") && Object.keys(req.body || {}).length === 0) {
+      return res.status(400).json({ message: "Expected application/json body" });
+    }
+
     const { email, password } = req.body;
 
     if (!email || !password) {
