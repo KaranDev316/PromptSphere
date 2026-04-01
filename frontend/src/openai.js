@@ -1,7 +1,4 @@
-// ============================================================
-// OpenAI API Configuration
-// Set your API key in .env.local:  VITE_OPENAI_API_KEY=sk-...
-// ============================================================
+
 const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY || "";
 
 const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
