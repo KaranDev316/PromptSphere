@@ -92,18 +92,18 @@ export async function login(email, password) {
 
 // Chat history
 export async function getChats() {
-  const data = await request("/chat");
+  const data = await request("/api/chat");
   return data.conversations || [];
 }
 
 export async function getChat(chatId) {
-  const data = await request(`/chat/${chatId}`);
+  const data = await request(`/api/chat/${chatId}`);
   return data.conversation;
 }
 
 // Chat – send message (creates or continues a conversation)
 export async function sendChatMessage(message, chatId) {
-  const data = await request("/chat", {
+  const data = await request("/api/chat", {
     method: "POST",
     body: JSON.stringify({ message, chatId }),
   });

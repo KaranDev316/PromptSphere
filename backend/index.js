@@ -25,13 +25,17 @@ const envOrigins = process.env.CORS_ORIGIN
   ? process.env.CORS_ORIGIN.split(",").map((origin) => origin.trim()).filter(Boolean)
   : [];
 const allowedOrigins = [...localOrigins, ...envOrigins];
+const allowAnyOrigin = envOrigins.includes("*");
+
+console.log("CORS origins:", allowedOrigins.length ? allowedOrigins : "[local only]");
+if (allowAnyOrigin) console.log("CORS is configured to allow any origin.");
 
 app.use(
   cors({
     origin: function (origin, callback) {
       if (!origin) return callback(null, true); // allow non-browser tools such as Postman and server-side requests
 
-      if (allowedOrigins.includes(origin)) {
+      if (allowAnyOrigin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
         console.warn("Blocked by CORS:", origin);
@@ -39,6 +43,7 @@ app.use(
       }
     },
     credentials: true,
+    optionsSuccessStatus: 204,
   })
 );
 
