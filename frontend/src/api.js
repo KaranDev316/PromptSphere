@@ -1,6 +1,8 @@
 
-// Use explicit backend URL in dev (your backend runs on localhost:5001)
-const API_BASE = import.meta?.env?.DEV ? "http://localhost:5001/api" : "/api";
+const DEFAULT_PROD_API = "https://backend-ej3m.onrender.com";
+const API_BASE =
+  import.meta.env.VITE_API_URL ||
+  (import.meta.env.DEV ? "http://localhost:5001" : DEFAULT_PROD_API);
 
 function getToken() {
   return localStorage.getItem("token");
@@ -50,24 +52,18 @@ async function request(path, options = {}) {
   return data;
 }
 
-// Auth
-const BASE_URL = "http://localhost:5001/api/auth";
+const AUTH_BASE = `${API_BASE}/api/auth`;
 
 export async function register(username, email, password) {
-  const res = await fetch(`${BASE_URL}/register`, {
+  const res = await fetch(`${AUTH_BASE}/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      username,
-      email,
-      password,
-    }),
+    body: JSON.stringify({ username, email, password }),
   });
 
   const data = await res.json();
-
   if (!res.ok) {
     throw new Error(data.message || "Register failed");
   }
@@ -76,19 +72,15 @@ export async function register(username, email, password) {
 }
 
 export async function login(email, password) {
-  const res = await fetch(`${BASE_URL}/login`, {
+  const res = await fetch(`${AUTH_BASE}/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      email,
-      password,
-    }),
+    body: JSON.stringify({ email, password }),
   });
 
   const data = await res.json();
-
   if (!res.ok) {
     throw new Error(data.message || "Login failed");
   }
@@ -123,14 +115,5 @@ export async function getMe() {
 
   console.log("TOKEN:", token);
 
-  const res = await fetch("http://localhost:5001/api/auth/me", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
-  console.log("RESPONSE:", res);
-
-  const data = await res.json();
-  return data;
+  return request("/api/auth/me");
 }

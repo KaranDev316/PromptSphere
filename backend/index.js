@@ -14,16 +14,31 @@ import chatRoutes from "./routes/chat.js";
 
 const app = express();
 const PORT = process.env.PORT || 5001;
-const corsOrigin = process.env.CORS_ORIGIN || "http://localhost:5173";
 
-// Middleware
-// CORS - allow frontend dev server and browsers to call the API
+const localOrigins = [
+  "http://localhost:5173",
+  "http://127.0.0.1:5173",
+  "http://localhost:5174",
+  "http://127.0.0.1:5174",
+];
+const envOrigins = process.env.CORS_ORIGIN
+  ? process.env.CORS_ORIGIN.split(",").map((origin) => origin.trim()).filter(Boolean)
+  : [];
+const allowedOrigins = [...localOrigins, ...envOrigins];
+
 app.use(
   cors({
-    origin: corsOrigin,
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true); // allow non-browser tools such as Postman and server-side requests
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        console.warn("Blocked by CORS:", origin);
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
