@@ -573,6 +573,15 @@
   cursor: pointer;
 }
 
+.new-chat-btn {
+  color: #000;
+  font-weight: 500;
+}
+
+.logout-btn {
+  color: #636363;
+}
+
 .new-chat-btn:hover,
 .logout-btn:hover {
   background: #f5f5f5;
