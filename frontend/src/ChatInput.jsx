@@ -76,7 +76,7 @@ function ChatInput({
           disabled={isLoading}
         />
         <button onClick={sendMessage} className="send-btn" disabled={isLoading}>
-          {isLoading ? "…" : "Send"}
+          {isLoading ? <div className="loading-square"></div> : <span className="send-icon">→</span>}
         </button>
       </div>
     </div>
