@@ -174,7 +174,7 @@ function LandingPage({ onAuth }) {
   return (
     <div className="landing-shell">
       <div className="landing-nav-bar">
-        <div className="landing-logo">Monochrome</div>
+        <div className="landing-logo">PromptSphere</div>
         <nav className="landing-nav-links">
           <a href="#features">Features</a>
           <a href="#about">About</a>
@@ -308,7 +308,7 @@ function LandingPage({ onAuth }) {
               D
             </a>
           </div>
-          <p>© 2026 Monochrome. Crafted for calm, elegant workflows.</p>
+          <p>© 2026 PromptSphere. Crafted for calm, elegant workflows.</p>
         </div>
       </footer>
     </div>

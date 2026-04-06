@@ -3,8 +3,8 @@ import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-// Load .env from project root (parent of backend/)
-dotenv.config({ path: path.resolve(__dirname, "../.env") });
+// Load .env from backend folder
+dotenv.config({ path: path.resolve(__dirname, "./.env") });
 
 import express from "express";
 import cors from "cors";
@@ -14,6 +14,7 @@ import chatRoutes from "./routes/chat.js";
 
 const app = express();
 const PORT = process.env.PORT || 5001;
+const corsOrigin = process.env.CORS_ORIGIN || "http://localhost:5173";
 
 // Middleware
 // CORS - allow frontend dev server and browsers to call the API

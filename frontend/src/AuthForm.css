@@ -26,9 +26,20 @@
   padding: 14px 16px;
   margin-bottom: 16px;
   font-size: 1rem;
-  border: 1px solid #d9d9d9;
+  border: 1px solid #d1d1d1;
   border-radius: 14px;
-  background: #fbfbfb;
+  background: #f4f4f4;
+  color: #111;
+}
+
+.auth-form input::placeholder {
+  color: #787878;
+}
+
+.auth-form input:focus {
+  outline: none;
+  border-color: #999;
+  background: #fff;
 }
 
 .auth-form button {
