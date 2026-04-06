@@ -53,6 +53,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [chats, setChats] = useState([]);
   const [activeChatId, setActiveChatId] = useState(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -117,7 +118,11 @@ function App() {
 
   return (
     <div className="app-shell">
-      <aside className="sidebar">
+      {/* Mobile overlay */}
+      {sidebarOpen && <div className="sidebar-overlay" onClick={() => setSidebarOpen(false)} />}
+
+      {/* Sidebar */}
+      <aside className={`sidebar ${sidebarOpen ? 'sidebar-open' : ''}`}>
         <div className="sidebar-header">
           <div className="sidebar-user">Hi, {user.username}</div>
           <button className="new-chat-btn" onClick={handleNewChat}>
@@ -151,9 +156,19 @@ function App() {
         </button>
       </aside>
 
+      {/* Main content */}
       <div className="app-container">
         <header className="app-header">
-          <span>{activeChatId ? "Conversation" : "New conversation"}</span>
+          <button
+            className="hamburger-btn"
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            aria-label="Toggle sidebar"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <span className="chat-title">{activeChatId ? "Conversation" : "New conversation"}</span>
         </header>
         <Chatbot messages={messages} isLoading={isLoading} />
         <ChatInput

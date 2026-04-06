@@ -64,19 +64,21 @@ function ChatInput({
   }
 
   return (
-    <div className="chat-input-container">
-      <input
-        className="chat-input"
-        type="text"
-        placeholder={isLoading ? "Waiting for reply…" : "Send a message to Chatbot"}
-        onChange={handleMessage}
-        value={inputText}
-        onKeyDown={handleKeyDown}
-        disabled={isLoading}
-      />
-      <button onClick={sendMessage} className="send-btn" disabled={isLoading}>
-        {isLoading ? "…" : "Send"}
-      </button>
+    <div className="chat-input-wrapper">
+      <div className="chat-input-container">
+        <input
+          className="chat-input"
+          type="text"
+          placeholder={isLoading ? "Waiting for reply…" : "Send a message to Chatbot"}
+          onChange={handleMessage}
+          value={inputText}
+          onKeyDown={handleKeyDown}
+          disabled={isLoading}
+        />
+        <button onClick={sendMessage} className="send-btn" disabled={isLoading}>
+          {isLoading ? "…" : "Send"}
+        </button>
+      </div>
     </div>
   );
 }
