@@ -1,68 +1,68 @@
 .auth-wrapper {
+  width: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
-  height: 100vh;
 }
 
 .auth-form {
   width: 100%;
-  max-width: 380px;
+  max-width: 420px;
   padding: 32px;
-  border-radius: 12px;
+  border-radius: 24px;
   background: #fff;
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.08);
+  border: 1px solid #e8e8e8;
 }
 
 .auth-form h2 {
   margin: 0 0 24px;
-  text-align: center;
+  text-align: left;
+  font-size: 1.85rem;
 }
 
 .auth-form input {
   display: block;
   width: 100%;
-  padding: 12px 14px;
-  margin-bottom: 14px;
-  font-size: 15px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-sizing: border-box;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  font-size: 1rem;
+  border: 1px solid #d9d9d9;
+  border-radius: 14px;
+  background: #fbfbfb;
 }
 
 .auth-form button {
   width: 100%;
-  padding: 12px;
-  font-size: 15px;
+  padding: 14px 16px;
+  font-size: 1rem;
   border: none;
-  border-radius: 8px;
-  background: #000;
+  border-radius: 14px;
+  background: #111;
   color: #fff;
   cursor: pointer;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .auth-form button:disabled {
-  opacity: 0.6;
+  opacity: 0.65;
   cursor: not-allowed;
 }
 
 .auth-form .toggle {
   text-align: center;
-  font-size: 14px;
+  font-size: 0.95rem;
   color: #555;
 }
 
 .auth-form .toggle span {
-  color: #000;
+  color: #111;
   cursor: pointer;
-  font-weight: 600;
-  text-decoration: underline;
+  font-weight: 700;
 }
 
 .auth-error {
-  color: #d32f2f;
-  font-size: 14px;
-  margin-bottom: 12px;
+  color: #c72b2b;
+  font-size: 0.95rem;
+  margin-bottom: 16px;
   text-align: center;
 }

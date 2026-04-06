@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
 
-  base: "/PromptSphere/", 
+  base: '/', 
   plugins: [react()],
   build: {
     outDir: 'dist',

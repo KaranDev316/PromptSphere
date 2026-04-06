@@ -19,7 +19,7 @@ const PORT = process.env.PORT || 5001;
 // CORS - allow frontend dev server and browsers to call the API
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: corsOrigin,
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
