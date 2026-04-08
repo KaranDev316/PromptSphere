@@ -128,30 +128,30 @@ cd promptsphere
 cd backend
 npm install
 ### Create .env file:
-MONGO_URI=your_mongodb_uri
-JWT_SECRET=your_secret
-OPENAI_API_KEY=your_api_key
+- MONGO_URI=your_mongodb_uri
+- JWT_SECRET=your_secret
+- OPENAI_API_KEY=your_api_key
 ### Run server:
 npm run dev
 
 
 ### 3. Setup Frontend
-cd frontend
-npm install
-npm run dev
+- cd frontend
+- npm install
+- npm run dev
 
 ### 🚧 Future Improvements
--🔄 Streaming responses
--📁 File uploads
--🔍 Chat search
--🧠 Memory system
--🌐 Multi-model support
+- 🔄 Streaming responses
+- 📁 File uploads
+- 🔍 Chat search
+- 🧠 Memory system
+- 🌐 Multi-model support
 
 ### 📈 Learnings
--Simplicity improves retention
--UX > model complexity
--Latency impacts engagement
--Backend design is critical
+- Simplicity improves retention
+- UX > model complexity
+- Latency impacts engagement
+- Backend design is critical
 
 ### 🤝 Contributing
 
