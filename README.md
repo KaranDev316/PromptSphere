@@ -59,7 +59,7 @@ graph TD
     B --> C[MongoDB Database]
     B --> D[OpenAI API]
 
----
+```
 🛠️ Tech Stack
 Frontend
 * React / Next.js
