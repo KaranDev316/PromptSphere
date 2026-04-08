@@ -70,14 +70,16 @@ graph TD
 - Express.js  
 
 ### Database
-- MongoDB (Mongoose)  
+- MongoDB (Mongoose)
+- MongoDB Atlas (Cloud Database) 
 
 ### AI Integration
 - OpenAI API  
 
 ### Deployment
 - Vercel (Frontend)  
-- Render (Backend)  
+- Render (Backend)
+- MongoDB Atlas (Database)
 
 ---
 
