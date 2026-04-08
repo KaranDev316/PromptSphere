@@ -55,15 +55,14 @@ Unlike feature-heavy AI tools, PromptSphere focuses on:
 
 ```mermaid
 graph TD
-    A[Client - React / Next.js] --> B[Express Server]
+    A[Client - React] --> B[Express Server]
     B --> C[MongoDB Database]
     B --> D[OpenAI API]
 
 ```
 🛠️ Tech Stack
 Frontend
-* React / Next.js
-* Tailwind CSS
+* React 
 Backend
 * Node.js
 * Express.js
@@ -73,7 +72,7 @@ AI
 * OpenAI API
 Deployment
 * Vercel (Frontend)
-* Backend (Render / Railway)
+* Backend (Render)
 
 🔐 Authentication
 * JWT-based authentication
