@@ -100,6 +100,7 @@ graph TD
 ---
 
 ## 📂 Folder Structure
+```bash
 backend/
 ├── controllers/
 ├── routes/
@@ -112,7 +113,7 @@ frontend/
 │ ├── pages/
 │ └── assets/
 └── public/
-
+```
 
 ---
 
@@ -154,6 +155,7 @@ npm run dev
 - Backend design is critical
 
 ### 🤝 Contributing
-
+```bash
 Contributions are welcome.
 For major changes, open an issue first.
+```
