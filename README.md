@@ -60,111 +60,100 @@ graph TD
     B --> D[OpenAI API]
 
 ```
-🛠️ Tech Stack
-Frontend
-* React 
-Backend
-* Node.js
-* Express.js
-Database
-* MongoDB (Mongoose)
-AI
-* OpenAI API
-Deployment
-* Vercel (Frontend)
-* Backend (Render)
+## 🛠️ Tech Stack
 
-🔐 Authentication
-* JWT-based authentication
-* Protected routes
-* Secure login & registration
+### Frontend
+- React   
 
-💬 Features
-* 🧠 AI-powered conversations
-* 💾 Chat history persistence
-* ➕ Create multiple chats
-* ⚡ Fast API responses
-* 🎯 Clean and minimal UI
+### Backend
+- Node.js  
+- Express.js  
 
-📂 Folder Structure
-/client
-  /components
-  /pages
-  /utils
+### Database
+- MongoDB (Mongoose)  
 
-/server
-  /controllers
-  /routes
-  /models
-  /middleware
+### AI Integration
+- OpenAI API  
 
-⚙️ Installation
-1. Clone the repository
+### Deployment
+- Vercel (Frontend)  
+- Render (Backend)  
+
+---
+
+## 🔐 Authentication
+
+- JWT-based authentication  
+- Protected API routes  
+- Secure login & registration flow  
+
+---
+
+## 💬 Features
+
+- 🧠 AI-powered conversations  
+- 💾 Persistent chat history  
+- ➕ Create & manage multiple chats  
+- ⚡ Fast response handling  
+- 🎯 Minimal and distraction-free UI  
+
+---
+
+## 📂 Folder Structure
+backend/
+├── controllers/
+├── routes/
+├── models/
+└── middleware/
+
+frontend/
+├── src/
+│ ├── components/
+│ ├── pages/
+│ └── assets/
+└── public/
+
+
+---
+
+## ⚙️ Installation
+
+### 1. Clone Repository
+
+```bash
 git clone https://github.com/your-username/promptsphere.git
 cd promptsphere
-
-2. Setup backend
-cd server
+```
+### 2. Setup Backend
+cd backend
 npm install
-Create .env file:
+### Create .env file:
 MONGO_URI=your_mongodb_uri
 JWT_SECRET=your_secret
 OPENAI_API_KEY=your_api_key
-Run server:
+### Run server:
 npm run dev
 
-3. Setup frontend
-cd client
+
+### 3. Setup Frontend
+cd frontend
 npm install
 npm run dev
 
-🚧 Future Improvements
-* 🔄 Streaming responses
-* 📁 File uploads (PDF, images)
-* 🔍 Chat search
-* 🧠 Memory system
-* 🌐 Multi-model support
+### 🚧 Future Improvements
+-🔄 Streaming responses
+-📁 File uploads
+-🔍 Chat search
+-🧠 Memory system
+-🌐 Multi-model support
 
-📈 Learnings
-* Simplicity improves retention
-* UX matters more than model choice
-* Latency is critical in AI apps
-* Backend design is the real bottleneck
+### 📈 Learnings
+-Simplicity improves retention
+-UX > model complexity
+-Latency impacts engagement
+-Backend design is critical
 
-🤝 Contributing
-Pull requests are welcome. For major changes, please open an issue first.
+### 🤝 Contributing
 
-📄 License
-MIT License
----
-
-# 🧠 Architecture Diagram (Visual Upgrade)
-
-Use this if you want something more **impressive than basic mermaid** (great for portfolio or Notion):
-
----
-
-## 🔷 System Architecture
-
-    ┌────────────────────────────┐
-    │        Frontend            │
-    │      React    +   UI    
-    └────────────┬──────────────┘
-                 │ HTTP Requests
-                 ▼
-    ┌────────────────────────────┐
-    │        Backend API         │
-    │     Node.js / Express      │
-    └────────────┬──────────────┘
-         │                    │
-         ▼                    ▼
-┌───────────────────┐ ┌────────────────────┐
-│ MongoDB │ │ OpenAI API │ │ (Chat Storage) │
-└───────────────────┘ └────────────────────┘
-         │ (AI Responses) │   
----
-
-## 🔄 Request Flow
-
-User Input ↓ Frontend (UI) ↓ Backend API ↓ OpenAI API ↓ Response Processing ↓ MongoDB Storage ↓ Frontend Update
----
+Contributions are welcome.
+For major changes, open an issue first.
