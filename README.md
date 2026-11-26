@@ -8,7 +8,7 @@
 ![License](https://img.shields.io/badge/License-MIT-blue)
 ![AI Powered](https://img.shields.io/badge/AI-OpenAI-orange)
 
-> A minimal AI chat workspace built for speed, clarity, and real conversations.
+> A minimal AI chat workspace built for clarity and real conversations.
 
 ---
 
