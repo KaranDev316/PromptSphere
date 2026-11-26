@@ -153,8 +153,7 @@ npm run dev
 ### 📈 Learnings
 - Simplicity improves retention
 - UX > model complexity
-- Latency impacts engagement
-- Backend design is critical
+
 
 ### 🤝 Contributing
 ```bash
